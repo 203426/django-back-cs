@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.contrib.auth.models import User
 from rest_framework import routers, serializers, viewsets
 
@@ -21,5 +21,7 @@ router.register(r'users', UserViewSet)
 # Additionally, we include login URLs for the browsable API.
 urlpatterns = [
     path('', include(router.urls)),
+    re_path(r'^api/v1/', include('primerComponente.urls')), 
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    
 ]
