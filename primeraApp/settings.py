@@ -38,8 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # Componentes agregados 
+    'primerComponente',
     
-    # Librerías dle proyecto
+    
+    # Librerías del proyecto agregados 
     'rest_framework',
 ]
 
