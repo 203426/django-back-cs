@@ -16,3 +16,15 @@ pip install django-filter
 ```bash
 'rest_framework',
 ```
+
+## Instalamos python-dotenv para ocultar credenciales importantes 
+```bash
+pip install python-dotenv
+```
+<!-- Se Agrega a settings para el uso de la libreria-->
+```bash
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+```

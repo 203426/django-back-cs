@@ -50,7 +50,6 @@ class PrimerTablaDetail(APIView):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk, format=None):
-        
         objetive = self.get_object(pk)
         if objetive!="No existe":
             objetive.delete()
