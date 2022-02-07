@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Componentes agregados 
     'primerComponente',
     'Login',
+    'loadImg',
     
     
     # Librerías del proyecto agregados 
