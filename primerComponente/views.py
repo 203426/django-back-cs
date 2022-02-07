@@ -36,8 +36,8 @@ class PrimerTablaList(APIView):
         if serializer.is_valid():
             serializer.save()
             datas = serializer.data
-            return Response(datas,status=status.HTTP_201_CREATED )
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+            return Response(self.jsonMaker("Success", datas, status.HTTP_201_CREATED))
+        return Response(self.jsonMaker("Error", serializer.errors, status.HTTP_400_BAD_REQUEST ))
     
     
     
