@@ -28,3 +28,12 @@ import os
 
 load_dotenv()
 ```
+
+## Instalamos Pillow para la gestión de las imagenes
+```bash
+pip install Pillow
+```
+<!-- Agregamos el nuevo componente a settings  -->
+```bash
+'loadImg',
+```
