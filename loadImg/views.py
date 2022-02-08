@@ -6,6 +6,9 @@ from rest_framework import status
 from rest_framework import exceptions
 import os.path
 
+# Json
+import json
+
 #Importaciones de modelos
 from loadImg.models import LoadImg
 
@@ -13,11 +16,17 @@ from loadImg.models import LoadImg
 from loadImg.serializers import LoadImgSerializers
 
 class LoadImgTable(APIView):
+    def jsonMaker(self,message, data, status):
+        json1={"messages":message, "pay_load":data, "status": status }
+        x=json.dumps(json1)
+        responseOk = json.loads(x)
+        return responseOk
     
     def get(self, request, format=None):
         queryset = LoadImg.objects.all()
         serializer = LoadImgSerializers(queryset, many = True, context = {'request':request})
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        responseOk=self.jsonMaker("succes",serializer.data , status.HTTP_200_OK)
+        return Response(responseOk)
 
     def post(self, request):
         if 'url_img' not in request.data:
