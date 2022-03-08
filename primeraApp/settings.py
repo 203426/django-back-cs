@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'Login',
     'loadImg',
     'register',
+    'Profile',
     
     
     # Librerías del proyecto agregados 
@@ -55,13 +56,17 @@ INSTALLED_APPS = [
 ]
 
 REST_FRAMEWORK = {
-       'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
-        'DEFAULT_AUTHENTICATION_CLASSES':('rest_framework.authentication.TokenAuthentication',),
+    #    'DEFAULT_PERMISSION_CLASSES':('rest_framework.permissions.IsAuthenticated',),
+        'DEFAULT_AUTHENTICATION_CLASSES':['rest_framework.authentication.TokenAuthentication',],
+        # 'DEFAULT_AUTHENTICATION_CLASSES': [
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # ],
         'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
         'PAGE_SIZE': 100,
-        'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework_simplejwt.authentication.JWTAuthentication',
-        ),
+        # 'DEFAULT_AUTHENTICATION_CLASSES': (
+        #     'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # ),
 
 }
 
@@ -77,6 +82,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'primeraApp.urls'
+BASE_DIR=Path(__file__).resolve().parent.parent
+MEDIA_URL='/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'assets')
 
 TEMPLATES = [
     {
