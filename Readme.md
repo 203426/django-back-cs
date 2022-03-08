@@ -37,3 +37,28 @@ pip install Pillow
 ```bash
 'loadImg',
 ```
+## Instalamos Cors-headers para permitir el consumo de la api 
+```bash
+python -m pip install django-cors-headers
+```
+<!-- Agregamos el nuevo componente a settings  -->
+```bash
+INSTALLED_APPS = [
+    ...,
+    "corsheaders",
+    ...,
+]
+```
+```bash
+MIDDLEWARE = [
+    ...,
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    ...,
+]
+```
+```bash
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',   
+]
+```
