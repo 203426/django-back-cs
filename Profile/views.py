@@ -79,15 +79,15 @@ class ProfileTable(APIView):
 
     def put(self, request, format=None):
         print(request.data)
-        archivos = request.data['url_img']
+        
+        
         profileNew = self.get_object(request.data['id_user'])
-        
-        
         
         if(profileNew != 404):
             user=User.objects.filter(id=request.data['id_user'])
              
             print(User.objects.filter(id=request.data['id_user']).values())
+            
             
             if(request.data['user']!=''):
                 
@@ -105,17 +105,24 @@ class ProfileTable(APIView):
                 
                 user.update(last_name=request.data['apellido'])
                 
-                
+            
+            
+            
             serializer = ProfileSerializer(profileNew,data=request.data)
-            if serializer.is_valid():
-                try:
-                    os.remove('assets/'+str(profileNew.url_img))
-                except os.error:
-                    print("La imagen no existe")
-                profileNew.url_img = archivos
-                profileNew.save()
-                return Response("Imagen actualizada", status=status.HTTP_201_CREATED)
-            return Response("Error xd", status=status.HTTP_400_BAD_REQUEST)
+            if(request.data['url_img']!=''):
+                
+                if serializer.is_valid():
+                    archivos = request.data['url_img']
+                    try:
+                        os.remove('assets/'+str(profileNew.url_img))
+                    except os.error:
+                        print("La imagen no existe")
+                    profileNew.url_img = archivos
+                    profileNew.save()
+                    return Response("Imagen actualizada", status=status.HTTP_201_CREATED)
+                return Response("Error xd", status=status.HTTP_400_BAD_REQUEST)
+            else:
+                return Response("Datos actualizados", status=status.HTTP_200_OK )
         else:
             return Response({"Message ":"User doesn't exist"})
 
@@ -153,11 +160,18 @@ class ProfileTableDetail(APIView):
     def get(self, request,id_user, format=None):
         print(id_user)
         idResponse = self.get_object(id_user)
+        user=User.objects.filter(id=id_user).values()
         print(idResponse)
         if idResponse != 404:
             idResponse = ProfileSerializer(idResponse)
-            user=User.objects.filter(id=id_user).values()
             response=self.crearRes(user,idResponse.data,status.HTTP_200_OK)
             return Response(response)
-        return Response("No hay datos", status = status.HTTP_400_BAD_REQUEST)
+
+        else: 
+            defaultResponse={
+                "id_user":id_user,
+                "url_img":"/img-profile/profile_unknow.png"
+            }
+            response=self.crearRes(user,defaultResponse,status.HTTP_400_BAD_REQUEST)
+            return Response(response)
     
