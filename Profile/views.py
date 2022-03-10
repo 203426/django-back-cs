@@ -65,16 +65,7 @@ class ProfileTable(APIView):
             return Response({"Message ":"El usuario no existe"})
 
 
-    # def get(self, request,pk, format=None):
-    #     print(pk)
-    #     idResponse = self.get_object(pk)
-    #     print(idResponse)
-    #     if idResponse != 404:
-    #         idResponse = ProfileSerializer(idResponse)
-    #         user=User.objects.filter(id=pk).values()
-    #         response=self.crearRes(user,idResponse.data,status.HTTP_200_OK)
-    #         return Response(idResponse.data, status = status.HTTP_200_OK)
-    #     return Response("No hay datos", status = status.HTTP_400_BAD_REQUEST)
+    
 
 
     def put(self, request, format=None):
@@ -126,14 +117,7 @@ class ProfileTable(APIView):
         else:
             return Response({"Message ":"User doesn't exist"})
 
-    # def delete(self, request):
-    #     idUser = request.data['id_user']
-    #     profile = self.get_object(idUser)
-    #     if profile != 404:
-    #         profile.url_img.delete(save=True)
-    #         # profile.delete(save=True)
-    #         return Response("Imagen eliminada",status=status.HTTP_204_NO_CONTENT)
-    #     return Response("Imagen no encontrada",status = status.HTTP_400_BAD_REQUEST)
+    
     
 class ProfileTableDetail(APIView):
     permission_classes = [IsAuthenticated]
